@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.animation.AnimationUtils
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.TextView
 
 @Suppress("DEPRECATION")
 class SplashScreen : AppCompatActivity() {
@@ -20,13 +21,17 @@ class SplashScreen : AppCompatActivity() {
         )
 
         val backgroundImage: ImageView = findViewById(R.id.SplashScreenImage)
-        val slideAnimation = AnimationUtils.loadAnimation(this, R.anim.side_slider)
-        backgroundImage.startAnimation(slideAnimation)
+        val slideTopAnimation = AnimationUtils.loadAnimation(this, R.anim.top_slider)
+        backgroundImage.startAnimation(slideTopAnimation)
+
+        val titleTextView: TextView = findViewById(R.id.title_textView)
+        val slideSideAnimation = AnimationUtils.loadAnimation(this, R.anim.side_slider)
+        titleTextView.startAnimation(slideSideAnimation)
 
         Handler().postDelayed({
             val mainActivityIntent = Intent(this, MainActivity::class.java)
             startActivity(mainActivityIntent)
             finish()
-        }, 3000)
+        }, 4000)
     }
 }
