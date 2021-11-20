@@ -28,10 +28,14 @@ class SplashScreen : AppCompatActivity() {
         val slideSideAnimation = AnimationUtils.loadAnimation(this, R.anim.side_slider)
         titleTextView.startAnimation(slideSideAnimation)
 
+        val bgHome: ImageView = findViewById(R.id.bg_home)
+        val slideTopBgHome = AnimationUtils.loadAnimation(this, R.anim.top_slider)
+        bgHome.startAnimation(slideTopBgHome)
+
         Handler().postDelayed({
             val mainActivityIntent = Intent(this, MainActivity::class.java)
             startActivity(mainActivityIntent)
             finish()
-        }, 4000)
+        }, 5000)
     }
 }

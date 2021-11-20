@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Sunu Ludo</string>
+    <string name="sunu_ludo">Sunu Ludo</string>
+    <string name="mode_en_ligne">Mode En Ligne</string>
+    <string name="mode_hors_ligne">Mode Hors Ligne</string>
+    <string name="continuer">Continuer</string>
+    <string name="quitter">Quitter</string>
 </resources>

@@ -1,21 +1,18 @@
-package com.example.sunuludo
+package com.example.sunuludo.views
 
-import android.graphics.Rect
-import android.os.Bundle
-import android.view.View
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.WindowManager
+import com.example.sunuludo.R
 
-@Suppress("DEPRECATION")
-class MainActivity : AppCompatActivity() {
+class OfflineActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_offline)
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-
     }
 }
