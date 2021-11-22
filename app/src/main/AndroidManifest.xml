@@ -10,8 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SunuLudo">
         <activity
-            android:name=".views.OfflineActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+            android:name=".views.OfflineActivity" />
         <activity
             android:name=".MainActivity" />
         <activity
