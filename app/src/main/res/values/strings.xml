@@ -8,4 +8,10 @@
     <string name="_2">2</string>
     <string name="_3">3</string>
     <string name="_4">4</string>
+    <string name="nombre_de_joueur">Nombre de joueur</string>
+    <string name="joueur_1">Joueur 1</string>
+    <string name="joueur_2">Joueur 2</string>
+    <string name="joueur_3">Joueur 3</string>
+    <string name="joueur_4">Joueur 4</string>
+    <string name="jouer">Jouer</string>
 </resources>
