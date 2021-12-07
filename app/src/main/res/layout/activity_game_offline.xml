@@ -44,12 +44,12 @@
             app:layout_constraintStart_toEndOf="@id/box_dice_green">
 
             <TextView
+                android:id="@+id/greenPlayer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:text="Player1"/>
+                android:textSize="18sp"/>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -72,12 +72,12 @@
             app:layout_constraintBottom_toTopOf="@id/box_dice_blue">
 
             <TextView
+                android:id="@+id/bluePlayer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:text="Player1"/>
+                android:textSize="18sp"/>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -100,12 +100,12 @@
             app:layout_constraintTop_toBottomOf="@id/box_dice_yellow">
 
             <TextView
+                android:id="@+id/yellow_player"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:text="Player1"/>
+                android:textSize="18sp"/>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -128,12 +128,12 @@
             app:layout_constraintEnd_toStartOf="@id/box_dice_red">
 
             <TextView
+                android:id="@+id/red_player"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:text="Player1"/>
+                android:textSize="18sp"/>
 
         </com.google.android.material.card.MaterialCardView>
 

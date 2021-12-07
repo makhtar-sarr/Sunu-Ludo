@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="oneGame"
-            type="com.example.sunuludo.models.Game" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,9 +89,9 @@
                     app:layout_constraintTop_toBottomOf="@id/number_player_radioGroup">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/green_name_editText"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{oneGame.playerGreen}" />
+                        android:layout_height="wrap_content" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -119,9 +117,9 @@
                     app:layout_constraintTop_toBottomOf="@id/player_name_green_outlinedTextField">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/yellow_name_editText"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{oneGame.playerYellow}" />
+                        android:layout_height="wrap_content" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -147,9 +145,9 @@
                     app:layout_constraintTop_toBottomOf="@id/player_name_yellow_outlinedTextField">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/red_name_editText"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{oneGame.playerRed}" />
+                        android:layout_height="wrap_content" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -175,9 +173,9 @@
                     app:layout_constraintTop_toBottomOf="@id/player_name_red_outlinedTextField">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/blue_name_editText"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{oneGame.playerBlue}" />
+                        android:layout_height="wrap_content" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
