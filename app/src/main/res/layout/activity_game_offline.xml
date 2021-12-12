@@ -9,7 +9,7 @@
             type="com.example.sunuludo.models.Game" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg3"
@@ -17,93 +17,67 @@
 
         <ImageView
             android:id="@+id/ludo_board"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:src="@drawable/ludo_board"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chip_green_1"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
             android:src="@drawable/ic_chips_green"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.27"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.59"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chip_green_2"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_green"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.35"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.59"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chip_green_3"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_green"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.35"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.64"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chip_green_4"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_green"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.27"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.64"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/box_dice_green"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/ic_box_dice"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ludo_board"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/dice_green"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="15dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_dice_1_fill_svgrepo_com"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ludo_board"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
+            android:id="@+id/green_player_name"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:backgroundTint="#00a300"
-            app:layout_constraintTop_toBottomOf="@id/ludo_board"
-            app:layout_constraintStart_toEndOf="@id/box_dice_green">
+            android:layout_gravity="top">
 
             <TextView
                 android:id="@+id/greenPlayer"
@@ -111,89 +85,65 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:textColor="@color/white"
-                android:textSize="18sp"/>
+                android:textSize="12sp" />
 
         </com.google.android.material.card.MaterialCardView>
 
         <ImageView
             android:id="@+id/chip_blue_1"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_blue"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.64"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.59"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chip_blue_2"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_blue"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.73"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.59"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chip_blue_3"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_blue"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.73"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.64"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chip_blue_4"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_blue"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.64"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.64"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/box_dice_blue"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/ic_box_dice"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ludo_board"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/dice_blue"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="15dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_dice_1_fill_svgrepo_com"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ludo_board"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
+            android:id="@+id/blue_player_name"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:rotation="-90"
+            android:layout_margin="10dp"
             android:backgroundTint="#008cf8"
-            app:layout_constraintStart_toEndOf="@id/ludo_board"
-            app:layout_constraintBottom_toTopOf="@id/box_dice_blue">
+            android:layout_gravity="top">
 
             <TextView
                 android:id="@+id/bluePlayer"
@@ -201,89 +151,66 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:textColor="@color/white"
-                android:textSize="18sp"/>
+                android:textSize="12sp"/>
 
         </com.google.android.material.card.MaterialCardView>
 
         <ImageView
             android:id="@+id/chip_yellow_1"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_yellow"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.27"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.36"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chip_yellow_2"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_yellow"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.35"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.36"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chip_yellow_3"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_yellow"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.35"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.41"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chip_yellow_4"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_yellow"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.27"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.41"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/box_dice_yellow"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/ic_box_dice"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/ludo_board"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/dice_yellow"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="15dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_dice_1_fill_svgrepo_com"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/ludo_board"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
+            android:id="@+id/yellow_player_name"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:rotation="90"
+            android:layout_margin="10dp"
+            android:rotation="-180"
             android:backgroundTint="#ffc400"
-            app:layout_constraintEnd_toStartOf="@id/ludo_board"
-            app:layout_constraintTop_toBottomOf="@id/box_dice_yellow">
+            android:layout_gravity="top">
 
             <TextView
                 android:id="@+id/yellow_player"
@@ -291,89 +218,66 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:textColor="@color/black"
-                android:textSize="18sp"/>
+                android:textSize="12sp"/>
 
         </com.google.android.material.card.MaterialCardView>
 
         <ImageView
             android:id="@+id/chip_red_1"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_red"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.64"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.36"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chip_red_2"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_red"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.73"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.36"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chip_red_3"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_red"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.73"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.41"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/chip_red_4"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_chips_red"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.64"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.41"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/box_dice_red"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/ic_box_dice"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/ludo_board"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/dice_red"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="15dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_dice_1_fill_svgrepo_com"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/ludo_board"
+            android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
+            android:id="@+id/red_player_name"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:rotation="-180"
             android:backgroundTint="#f30f00"
-            app:layout_constraintBottom_toTopOf="@id/ludo_board"
-            app:layout_constraintEnd_toStartOf="@id/box_dice_red">
+            android:layout_gravity="top" >
 
             <TextView
                 android:id="@+id/red_player"
@@ -381,9 +285,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:textColor="@color/white"
-                android:textSize="18sp"/>
+                android:textSize="12sp"/>
 
         </com.google.android.material.card.MaterialCardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>
