@@ -1,7 +1,9 @@
 package com.example.sunuludo.views
 
 import android.os.Bundle
+import android.view.View
 import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.RelativeLayout
@@ -11,7 +13,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.sunuludo.R
 import com.example.sunuludo.databinding.ActivityGameOfflineBinding
 
-class GameOfflineActivity : AppCompatActivity() {
+class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityGameOfflineBinding
     val EXTRA_MESSAGE = "com.example.android.sunuludo.extra.MESSAGE"
     var height = 0
@@ -20,7 +22,16 @@ class GameOfflineActivity : AppCompatActivity() {
     var bottom:Int = 0
     var d:Int = 0
     var n:Int = 0
+    var n1:Int = 0
+    var n2:Int = 0
+    var n3:Int = 0
+    var n4:Int = 0
+    var red = 0
+    var blue:Int = 0
+    var green:Int = 0
+    var yellow:Int = 0
     var PlayerNo:Int = 0
+    var extraN = 0
     var x1 = 1
     var x2:Int = 1
     var x3:Int = 1
@@ -126,11 +137,48 @@ class GameOfflineActivity : AppCompatActivity() {
         fillBlue(chipBlue2)
         fillBlue(chipBlue3)
         fillBlue(chipBlue4)
+        startGame()
 
-        rollDice(binding.diceGreen)
+
 //        binding.diceYellow.visibility = INVISIBLE
 //        binding.diceRed.visibility = INVISIBLE
 //        binding.diceBlue.visibility = INVISIBLE
+    }
+
+    private fun assignItems() {
+        height = resources.displayMetrics.heightPixels
+        width = resources.displayMetrics.widthPixels
+        top = (height - width) / 2
+        bottom = top + width / 2
+        d = width / 15
+        boxDiceGreen = binding.boxDiceGreen
+        boxDiceYellow = binding.boxDiceYellow
+        boxDiceRed = binding.boxDiceRed
+        boxDiceBlue = binding.boxDiceBlue
+        diceGreen = binding.diceGreen
+        diceYellow = binding.diceYellow
+        diceRed = binding.diceRed
+        diceBlue = binding.diceBlue
+        greenPlayerName = binding.greenPlayerName
+        yellowPlayerName = binding.yellowPlayerName
+        redPlayerName = binding.redPlayerName
+        bluePlayerName = binding.bluePlayerName
+        chipGreen1 = binding.chipGreen1
+        chipGreen2 = binding.chipGreen2
+        chipGreen3 = binding.chipGreen3
+        chipGreen4 = binding.chipGreen4
+        chipYellow1 = binding.chipYellow1
+        chipYellow2 = binding.chipYellow2
+        chipYellow3 = binding.chipYellow3
+        chipYellow4 = binding.chipYellow4
+        chipRed1 = binding.chipRed1
+        chipRed2 = binding.chipRed2
+        chipRed3 = binding.chipRed3
+        chipRed4 = binding.chipRed4
+        chipBlue1 = binding.chipBlue1
+        chipBlue2 = binding.chipBlue2
+        chipBlue3 = binding.chipBlue3
+        chipBlue4 = binding.chipBlue4
     }
 
     private fun fillDice(dice: ImageView, diceBox: ImageView) {
@@ -200,25 +248,25 @@ class GameOfflineActivity : AppCompatActivity() {
             binding.greenPlayerName -> {
                 val mParamsPlayerGreen = greenPlayerName.layoutParams as RelativeLayout.LayoutParams
                 mParamsPlayerGreen.leftMargin = 90
-                mParamsPlayerGreen.topMargin = width + 5 * d + 15
+                mParamsPlayerGreen.topMargin = width + 5 * d
                 greenPlayerName.layoutParams = mParamsPlayerGreen
             }
             binding.yellowPlayerName -> {
                 val mParamsPlayerYellow = yellowPlayerName.layoutParams as RelativeLayout.LayoutParams
                 mParamsPlayerYellow.leftMargin = 90
-                mParamsPlayerYellow.topMargin = width - 13 * d + 20
+                mParamsPlayerYellow.topMargin = width - 12 * d + 20
                 yellowPlayerName.layoutParams = mParamsPlayerYellow
             }
             binding.redPlayerName -> {
                 val mParamsPlayerRed = redPlayerName.layoutParams as RelativeLayout.LayoutParams
-                mParamsPlayerRed.leftMargin = 6 * d
-                mParamsPlayerRed.topMargin = width - 13 * d + 20
+                mParamsPlayerRed.leftMargin = 8 * d + 10
+                mParamsPlayerRed.topMargin = width - 12 * d + 20
                 redPlayerName.layoutParams = mParamsPlayerRed
             }
             binding.bluePlayerName -> {
                 val mParamsPlayerBlue = bluePlayerName.layoutParams as RelativeLayout.LayoutParams
-                mParamsPlayerBlue.leftMargin = 6 * d
-                mParamsPlayerBlue.topMargin = width + 5 * d + 15
+                mParamsPlayerBlue.leftMargin = 8 * d + 10
+                mParamsPlayerBlue.topMargin = width + 5 * d
                 bluePlayerName.layoutParams = mParamsPlayerBlue
             }
         }
@@ -227,8 +275,8 @@ class GameOfflineActivity : AppCompatActivity() {
     private fun fillGreen(chipGreen: ImageView) {
         when (chipGreen) {
             binding.chipGreen1 -> {
-                chipGreen1.layoutParams.height = d
-                chipGreen1.layoutParams.width = d
+                chipGreen1.layoutParams.height = d - 5
+                chipGreen1.layoutParams.width = d - 5
                 val mParams1 = chipGreen1.layoutParams as RelativeLayout.LayoutParams
                 mParams1.leftMargin = 3 * d / 2
                 mParams1.topMargin = 9 * d + top + 3 * d / 2
@@ -237,8 +285,8 @@ class GameOfflineActivity : AppCompatActivity() {
                 x13 = 40
             }
             binding.chipGreen2 -> {
-                chipGreen2.layoutParams.height = d
-                chipGreen2.layoutParams.width = d
+                chipGreen2.layoutParams.height = d - 5
+                chipGreen2.layoutParams.width = d - 5
                 val mParams2 = chipGreen2.layoutParams as RelativeLayout.LayoutParams
                 mParams2.leftMargin = 2 * d + 3 * d / 2
                 mParams2.topMargin = 9 * d + top + 3 * d / 2
@@ -247,8 +295,8 @@ class GameOfflineActivity : AppCompatActivity() {
                 x14 = 40
             }
             binding.chipGreen3 -> {
-                chipGreen3.layoutParams.height = d
-                chipGreen3.layoutParams.width = d
+                chipGreen3.layoutParams.height = d - 5
+                chipGreen3.layoutParams.width = d - 5
                 val mParams3 = chipGreen3.layoutParams as RelativeLayout.LayoutParams
                 mParams3.leftMargin = 3 * d / 2
                 mParams3.topMargin = 11 * d + top + 3 * d / 2
@@ -257,8 +305,8 @@ class GameOfflineActivity : AppCompatActivity() {
                 x15 = 40
             }
             binding.chipGreen4 -> {
-                chipGreen4.layoutParams.height = d
-                chipGreen4.layoutParams.width = d
+                chipGreen4.layoutParams.height = d - 5
+                chipGreen4.layoutParams.width = d - 5
                 val mParams4 = chipGreen4.layoutParams as RelativeLayout.LayoutParams
                 mParams4.leftMargin = 2 * d + 3 * d / 2
                 mParams4.topMargin = 11 * d + top + 3 * d / 2
@@ -269,47 +317,11 @@ class GameOfflineActivity : AppCompatActivity() {
         }
     }
 
-    private fun assignItems() {
-        height = resources.displayMetrics.heightPixels
-        width = resources.displayMetrics.widthPixels
-        top = (height - width) / 2
-        bottom = top + width / 2
-        d = width / 15
-        boxDiceGreen = binding.boxDiceGreen
-        boxDiceYellow = binding.boxDiceYellow
-        boxDiceRed = binding.boxDiceRed
-        boxDiceBlue = binding.boxDiceBlue
-        diceGreen = binding.diceGreen
-        diceYellow = binding.diceYellow
-        diceRed = binding.diceRed
-        diceBlue = binding.diceBlue
-        greenPlayerName = binding.greenPlayerName
-        yellowPlayerName = binding.yellowPlayerName
-        redPlayerName = binding.redPlayerName
-        bluePlayerName = binding.bluePlayerName
-        chipGreen1 = binding.chipGreen1
-        chipGreen2 = binding.chipGreen2
-        chipGreen3 = binding.chipGreen3
-        chipGreen4 = binding.chipGreen4
-        chipYellow1 = binding.chipYellow1
-        chipYellow2 = binding.chipYellow2
-        chipYellow3 = binding.chipYellow3
-        chipYellow4 = binding.chipYellow4
-        chipRed1 = binding.chipRed1
-        chipRed2 = binding.chipRed2
-        chipRed3 = binding.chipRed3
-        chipRed4 = binding.chipRed4
-        chipBlue1 = binding.chipBlue1
-        chipBlue2 = binding.chipBlue2
-        chipBlue3 = binding.chipBlue3
-        chipBlue4 = binding.chipBlue4
-    }
-
     private fun fillYellow(chipYellow: ImageView) {
         when (chipYellow) {
             binding.chipYellow1 -> {
-                chipYellow1.layoutParams.height = d
-                chipYellow1.layoutParams.width = d
+                chipYellow1.layoutParams.height = d - 5
+                chipYellow1.layoutParams.width = d - 5
                 val mParams1 = chipYellow1.layoutParams as RelativeLayout.LayoutParams
                 mParams1.leftMargin = 3 * d / 2
                 mParams1.topMargin = top + 3 * d / 2
@@ -318,8 +330,8 @@ class GameOfflineActivity : AppCompatActivity() {
                 x1 = 1
             }
             binding.chipYellow2 -> {
-                chipYellow2.layoutParams.height = d
-                chipYellow2.layoutParams.width = d
+                chipYellow2.layoutParams.height = d - 5
+                chipYellow2.layoutParams.width = d - 5
                 val mParams2 = chipYellow2.layoutParams as RelativeLayout.LayoutParams
                 mParams2.leftMargin = 2 * d + 3 * d / 2
                 mParams2.topMargin = top + 3 * d / 2
@@ -328,8 +340,8 @@ class GameOfflineActivity : AppCompatActivity() {
                 x2 = 1
             }
             binding.chipYellow3 -> {
-                chipYellow3.layoutParams.height = d
-                chipYellow3.layoutParams.width = d
+                chipYellow3.layoutParams.height = d - 5
+                chipYellow3.layoutParams.width = d - 5
                 val mParams3 = chipYellow3.layoutParams as RelativeLayout.LayoutParams
                 mParams3.leftMargin = 3 * d / 2
                 mParams3.topMargin = 2 * d + top + 3 * d / 2
@@ -338,8 +350,8 @@ class GameOfflineActivity : AppCompatActivity() {
                 x3 = 1
             }
             binding.chipYellow4 -> {
-                chipYellow4.layoutParams.height = d
-                chipYellow4.layoutParams.width = d
+                chipYellow4.layoutParams.height = d - 5
+                chipYellow4.layoutParams.width = d - 5
                 val mParams4 = chipYellow4.layoutParams as RelativeLayout.LayoutParams
                 mParams4.leftMargin = 2 * d + 3 * d / 2
                 mParams4.topMargin = 2 * d + top + 3 * d / 2
@@ -353,8 +365,8 @@ class GameOfflineActivity : AppCompatActivity() {
     private fun fillRed(chipRed: ImageView) {
         when (chipRed) {
             binding.chipRed1 -> {
-                chipRed1.layoutParams.height = d
-                chipRed1.layoutParams.width = d
+                chipRed1.layoutParams.height = d - 5
+                chipRed1.layoutParams.width = d - 5
                 val mParams1 = chipRed1.layoutParams as RelativeLayout.LayoutParams
                 mParams1.leftMargin = 9 * d + 3 * d / 2
                 mParams1.topMargin = top + 3 * d / 2
@@ -363,8 +375,8 @@ class GameOfflineActivity : AppCompatActivity() {
                 x5 = 14
             }
             binding.chipRed2 -> {
-                chipRed2.layoutParams.height = d
-                chipRed2.layoutParams.width = d
+                chipRed2.layoutParams.height = d - 5
+                chipRed2.layoutParams.width = d - 5
                 val mParams2 = chipRed2.layoutParams as RelativeLayout.LayoutParams
                 mParams2.leftMargin = 11 * d + 3 * d / 2
                 mParams2.topMargin = top + 3 * d / 2
@@ -373,8 +385,8 @@ class GameOfflineActivity : AppCompatActivity() {
                 x6 = 14
             }
             binding.chipRed3 -> {
-                chipRed3.layoutParams.height = d
-                chipRed3.layoutParams.width = d
+                chipRed3.layoutParams.height = d - 5
+                chipRed3.layoutParams.width = d - 5
                 val mParams3 = chipRed3.layoutParams as RelativeLayout.LayoutParams
                 mParams3.leftMargin = 9 * d + 3 * d / 2
                 mParams3.topMargin = 2 * d + top + 3 * d / 2
@@ -383,8 +395,8 @@ class GameOfflineActivity : AppCompatActivity() {
                 x7 = 14
             }
             binding.chipRed4 -> {
-                chipRed4.layoutParams.height = d
-                chipRed4.layoutParams.width = d
+                chipRed4.layoutParams.height = d - 5
+                chipRed4.layoutParams.width = d - 5
                 val mParams4 = chipRed4.layoutParams as RelativeLayout.LayoutParams
                 mParams4.leftMargin = 11 * d + 3 * d / 2
                 mParams4.topMargin = 2 * d + top + 3 * d / 2
@@ -398,8 +410,8 @@ class GameOfflineActivity : AppCompatActivity() {
     private fun fillBlue(chipBlue: ImageView) {
         when (chipBlue) {
             binding.chipBlue1 -> {
-                chipBlue1.layoutParams.height = d
-                chipBlue1.layoutParams.width = d
+                chipBlue1.layoutParams.height = d - 5
+                chipBlue1.layoutParams.width = d - 5
                 val mParams1 = chipBlue1.layoutParams as RelativeLayout.LayoutParams
                 mParams1.leftMargin = 9 * d + 3 * d / 2
                 mParams1.topMargin = 9 * d + top + 3 * d / 2
@@ -408,8 +420,8 @@ class GameOfflineActivity : AppCompatActivity() {
                 x9 = 27
             }
             binding.chipBlue2 -> {
-                chipBlue2.layoutParams.height = d
-                chipBlue2.layoutParams.width = d
+                chipBlue2.layoutParams.height = d - 5
+                chipBlue2.layoutParams.width = d - 5
                 val mParams2 = chipBlue2.layoutParams as RelativeLayout.LayoutParams
                 mParams2.leftMargin = 11 * d + 3 * d / 2
                 mParams2.topMargin = 9 * d + top + 3 * d / 2
@@ -418,8 +430,8 @@ class GameOfflineActivity : AppCompatActivity() {
                 x10 = 27
             }
             binding.chipBlue3 -> {
-                chipBlue3.layoutParams.height = d
-                chipBlue3.layoutParams.width = d
+                chipBlue3.layoutParams.height = d - 5
+                chipBlue3.layoutParams.width = d - 5
                 val mParams3 = chipBlue3.layoutParams as RelativeLayout.LayoutParams
                 mParams3.leftMargin = 9 * d + 3 * d / 2
                 mParams3.topMargin = 11 * d + top + 3 * d / 2
@@ -428,8 +440,8 @@ class GameOfflineActivity : AppCompatActivity() {
                 x11 = 27
             }
             binding.chipBlue4 -> {
-                chipBlue4.layoutParams.height = d
-                chipBlue4.layoutParams.width = d
+                chipBlue4.layoutParams.height = d - 5
+                chipBlue4.layoutParams.width = d - 5
                 val mParams4 = chipBlue4.layoutParams as RelativeLayout.LayoutParams
                 mParams4.leftMargin = 11 * d + 3 * d / 2
                 mParams4.topMargin = 11 * d + top + 3 * d / 2
@@ -440,7 +452,1119 @@ class GameOfflineActivity : AppCompatActivity() {
         }
     }
 
-    private fun rollDice(diceImage: ImageView) {
+    override fun onClick(chip: View) {
+        chip.run { bringToFront() }
+        val mP = chip.layoutParams as RelativeLayout.LayoutParams
+        when (chip) {
+            binding.chipGreen1 -> {
+                if (green1 == 0) {
+                    mP.leftMargin = 6 * d
+                    mP.topMargin = top + 13 * d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    green1 = 1
+                } else x13 = positionOf(x13, chipGreen1)
+                checkPosition(chipGreen1)
+            }
+            binding.chipGreen2 -> {
+                if (green2 == 0) {
+                    mP.leftMargin = 6 * d
+                    mP.topMargin = top + 13 * d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    green2 = 1
+                } else x14 = positionOf(x14, chipGreen2)
+                checkPosition(chipGreen2)
+            }
+            binding.chipGreen3 -> {
+                if (green3 == 0) {
+                    mP.leftMargin = 6 * d
+                    mP.topMargin = top + 13 * d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    green3 = 1
+                } else x15 = positionOf(x15, chipGreen3)
+                checkPosition(chipGreen3)
+            }
+            binding.chipGreen4 -> {
+                if (green4 == 0) {
+                    mP.leftMargin = 6 * d
+                    mP.topMargin = top + 13 * d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    green4 = 1
+                } else x16 = positionOf(x16, chipGreen4)
+                checkPosition(chipGreen4)
+            }
+            binding.chipYellow1 -> {
+                if (yellow1 == 0) {
+                    mP.leftMargin = d
+                    mP.topMargin = top + 6 * d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    yellow1 = 1
+                } else x1 = positionOf(x1, chipYellow1)
+                checkPosition(chipYellow1)
+            }
+            binding.chipYellow2 -> {
+                if (yellow2 == 0) {
+                    mP.leftMargin = d
+                    mP.topMargin = top + 6 * d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    yellow2 = 1
+                } else x2 = positionOf(x2, chipYellow2)
+                checkPosition(chipYellow2)
+            }
+            binding.chipYellow3 -> {
+                if (yellow3 == 0) {
+                    mP.leftMargin = d
+                    mP.topMargin = top + 6 * d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    yellow3 = 1
+                } else x3 = positionOf(x3, chipYellow3)
+                checkPosition(chipYellow3)
+            }
+            binding.chipYellow4 -> {
+                if (yellow4 == 0) {
+                    mP.leftMargin = d
+                    mP.topMargin = top + 6 * d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    yellow4 = 1
+                } else x4 = positionOf(x4, chipYellow4)
+                checkPosition(chipYellow4)
+            }
+            binding.chipRed1 -> {
+                if (red1 == 0) {
+                    mP.leftMargin = 8 * d
+                    mP.topMargin = top + d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    red1 = 1
+                } else x5 = positionOf(x5, chipRed1)
+                checkPosition(chipRed1)
+            }
+            binding.chipRed2 -> {
+                if (red2 == 0) {
+                    mP.leftMargin = 8 * d
+                    mP.topMargin = top + d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    red2 = 1
+                } else x6 = positionOf(x6, chipRed2)
+                checkPosition(chipRed2)
+            }
+            binding.chipRed3 -> {
+                if (red3 == 0) {
+                    mP.leftMargin = 8 * d
+                    mP.topMargin = top + d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    red3 = 1
+                } else x7 = positionOf(x7, chipRed3)
+                checkPosition(chipRed3)
+            }
+            binding.chipRed4 -> {
+                if (red4 == 0) {
+                    mP.leftMargin = 8 * d
+                    mP.topMargin = top + d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    red4 = 1
+                } else x8 = positionOf(x8, chipRed4)
+                checkPosition(chipRed4)
+            }
+            binding.chipBlue1 -> {
+                if (blue1 == 0) {
+                    mP.leftMargin = 13 * d
+                    mP.topMargin = top + 8 * d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    blue1 = 1
+                } else x9 = positionOf(x9, chipBlue1)
+                checkPosition(chipBlue1)
+            }
+            binding.chipBlue2 -> {
+                if (blue2 == 0) {
+                    mP.leftMargin = 13 * d
+                    mP.topMargin = top + 8 * d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    blue2 = 1
+                } else x10 = positionOf(x10, chipBlue2)
+                checkPosition(chipBlue2)
+            }
+            binding.chipBlue3 -> {
+                if (blue3 == 0) {
+                    mP.leftMargin = 13 * d
+                    mP.topMargin = top + 8 * d
+                    chip.layoutParams = mP
+                    setDiceClickable()
+                    blue3 = 1
+                } else x11 = positionOf(x11, chipBlue3)
+                checkPosition(chipBlue3)
+            }
+            binding.chipBlue4 -> {
+                if (blue4 == 0) {
+                    mP.leftMargin = 13 * d
+                    mP.topMargin = top + 8 * d
+                    chip.layoutParams = mP
+                    blue4 = 1
+                } else x12 = positionOf(x12, chipBlue4)
+                checkPosition(chipBlue4)
+            }
+
+            binding.diceGreen -> {
+                n = rollDice(binding.diceGreen)
+                //                Toast.makeText(getApplicationContext(), n + "was obtained", Toast.LENGTH_SHORT).show();
+                val pt = PlayerNo
+                setClickableFalse()
+                diceGreen.isClickable = false
+                if (PlayerNo % 4 == 1) {
+                    if (green1 == 1) {
+                        chipGreen1.setOnClickListener(this)
+                    }
+                    if (green2 == 1) {
+                        chipGreen2.setOnClickListener(this)
+                    }
+                    if (green3 == 1) {
+                        chipGreen3.setOnClickListener(this)
+                    }
+                    if (green4 == 1) {
+                        chipGreen4.setOnClickListener(this)
+                    }
+                    when (n) {
+                        6 -> {
+                            green = 1
+                            chipGreen1.setOnClickListener(this)
+                            chipGreen2.setOnClickListener(this)
+                            chipGreen3.setOnClickListener(this)
+                            chipGreen4.setOnClickListener(this)
+                        }
+                        else -> {
+                            PlayerNo++
+                        }
+                    }
+                    n1 = n + x13 - 38
+                    n2 = n + x14 - 38
+                    n3 = n + x15 - 38
+                    n4 = n + x16 - 38
+
+                    if (n1 == 6 && chipGreen1.top > top + 6 * d && chipGreen1.left == 7 * d) {
+                        chipGreen1.visibility = INVISIBLE
+                        x13 = 0
+                        setDiceClickable()
+                        PlayerNo = pt
+                    }
+                    if (n2 == 6 && chipGreen2.top > top + 6 * d && chipGreen2.left == 7 * d) {
+                        chipGreen2.visibility = INVISIBLE
+                        x14 = 0
+                        setDiceClickable()
+                        PlayerNo = pt
+                    }
+                    if (n3 == 6 && chipGreen3.top > top + 6 * d && chipGreen3.left == 7 * d) {
+                        chipGreen3.visibility = INVISIBLE
+                        x15 = 0
+                        setDiceClickable()
+                        PlayerNo = pt
+                    }
+                    if (n4 == 6 && chipGreen4.top > top + 6 * d && chipGreen4.left == 7 * d) {
+                        chipGreen4.visibility = INVISIBLE
+                        x16 = 0
+                        setDiceClickable()
+                        PlayerNo = pt
+                    }
+                    if (n1 > 5 && chipGreen1.top > top + 6 * d && chipGreen1.left == 7 * d || chipGreen1.visibility == INVISIBLE) chipGreen1.isClickable = false
+                    if (n2 > 5 && chipGreen2.top > top + 6 * d && chipGreen2.left == 7 * d || chipGreen2.visibility == INVISIBLE) chipGreen2.isClickable = false
+                    if (n3 > 5 && chipGreen3.top > top + 6 * d && chipGreen3.left == 7 * d || chipGreen3.visibility == INVISIBLE) chipGreen3.isClickable = false
+                    if (n4 > 5 && chipGreen4.top > top + 6 * d && chipGreen4.left == 7 * d || chipGreen4.visibility == INVISIBLE) chipGreen4.isClickable = false
+                    if (!chipGreen1.isClickable && !chipGreen2.isClickable && !chipGreen3.isClickable && !chipGreen4.isClickable || green == 0) {
+                        setDiceClickable()
+                    }
+                }
+            }
+            binding.diceYellow -> {
+                n = rollDice(binding.diceYellow)
+                val pt = PlayerNo
+                setClickableFalse()
+                diceYellow.isClickable = false
+                if (PlayerNo % 4 == 2) {
+                    if (yellow1 == 1) {
+                        chipYellow1.setOnClickListener(this)
+                    }
+                    if (yellow2 == 1) {
+                        chipYellow2.setOnClickListener(this)
+                    }
+                    if (yellow3 == 1) {
+                        chipYellow3.setOnClickListener(this)
+                    }
+                    if (yellow4 == 1) {
+                        chipYellow4.setOnClickListener(this)
+                    }
+                    when (n) {
+                        6 -> {
+                            yellow = 1
+                            chipYellow1.setOnClickListener(this)
+                            chipYellow2.setOnClickListener(this)
+                            chipYellow3.setOnClickListener(this)
+                            chipYellow4.setOnClickListener(this)
+                        }
+                        else -> {
+                            PlayerNo++
+                        }
+                    }
+                    n1 = x1 - 51 + n
+                    n2 = x2 - 51 + n
+                    n3 = x3 - 51 + n
+                    n4 = x4 - 51 + n
+
+                    if (n1 == 6) {
+                        chipYellow1.visibility = INVISIBLE
+                        x1 = 0
+                        setDiceClickable()
+                        PlayerNo = pt
+                    }
+                    if (n2 == 6) {
+                        chipYellow2.visibility = INVISIBLE
+                        x2 = 0
+                        setDiceClickable()
+                        PlayerNo = pt
+                    }
+                    if (n3 == 6) {
+                        chipYellow3.visibility = INVISIBLE
+                        x3 = 0
+                        setDiceClickable()
+                        PlayerNo = pt
+                    }
+                    if (n4 == 6) {
+                        chipYellow4.visibility = INVISIBLE
+                        x4 = 0
+                        setDiceClickable()
+                        PlayerNo = pt
+                    }
+                    if (n1 > 5 || chipYellow1.visibility == INVISIBLE) chipYellow1.isClickable = false
+                    if (n2 > 5 || chipYellow2.visibility == INVISIBLE) chipYellow2.isClickable = false
+                    if (n3 > 5 || chipYellow3.visibility == INVISIBLE) chipYellow3.isClickable = false
+                    if (n4 > 5 || chipYellow4.visibility == INVISIBLE) chipYellow4.isClickable = false
+                    if (!chipYellow1.isClickable && !chipYellow2.isClickable && !chipYellow3.isClickable && !chipYellow4.isClickable || yellow == 0) {
+                        setDiceClickable()
+                    }
+                }
+            }
+            binding.diceBlue -> {
+                n = rollDice(binding.diceBlue)
+                val pt = PlayerNo
+                setClickableFalse()
+                diceBlue.isClickable = false
+                if (PlayerNo % 4 == 0) {
+                    if (blue1 == 1) {
+                        chipBlue1.setOnClickListener(this)
+                    }
+                    if (blue2 == 1) {
+                        chipBlue2.setOnClickListener(this)
+                    }
+                    if (blue3 == 1) {
+                        chipBlue3.setOnClickListener(this)
+                    }
+                    if (blue4 == 1) {
+                        chipBlue4.setOnClickListener(this)
+                    }
+                    when (n) {
+                        6 -> {
+                            blue = 1
+                            chipBlue1.setOnClickListener(this)
+                            chipBlue2.setOnClickListener(this)
+                            chipBlue3.setOnClickListener(this)
+                            chipBlue4.setOnClickListener(this)
+                        }
+                        else -> {
+                            PlayerNo++
+                        }
+                    }
+                    n1 = n + x9 - 25
+                    n2 = n + x10 - 25
+                    n3 = n + x11 - 25
+                    n4 = n + x12 - 25
+                    if (n1 == 6 && chipBlue1.left > 7 * d && chipBlue1.top == top + 7 * d) {
+                        chipBlue1.visibility = INVISIBLE
+                        PlayerNo = pt
+                        x9 = 0
+                        setDiceClickable()
+                    }
+                    if (n2 == 6 && chipBlue2.left > 7 * d && chipBlue2.top == top + 7 * d) {
+                        chipBlue2.visibility = INVISIBLE
+                        x10 = 0
+                        PlayerNo = pt
+                        setDiceClickable()
+                    }
+                    if (n3 == 6 && chipBlue3.left > 7 * d && chipBlue3.top == top + 7 * d) {
+                        chipBlue3.visibility = INVISIBLE
+                        PlayerNo = pt
+                        x11 = 0
+                        setDiceClickable()
+                    }
+                    if (n4 == 6 && chipBlue4.left > 7 * d && chipBlue4.top == top + 7 * d) {
+                        chipBlue4.visibility = INVISIBLE
+                        PlayerNo = pt
+                        x12 = 0
+                        setDiceClickable()
+                    }
+                    if (n1 > 5 && chipBlue1.left > 7 * d && chipBlue1.top == top + 7 * d || chipBlue1.visibility == INVISIBLE) chipBlue1.isClickable = false
+                    if (n2 > 5 && chipBlue2.left > 7 * d && chipBlue2.top == top + 7 * d || chipBlue2.visibility == INVISIBLE) chipBlue2.isClickable = false
+                    if (n3 > 5 && chipBlue3.left > 7 * d && chipBlue3.top == top + 7 * d || chipBlue3.visibility == INVISIBLE) chipBlue3.isClickable = false
+                    if (n4 > 5 && chipBlue4.left > 7 * d && chipBlue4.top == top + 7 * d || chipBlue4.visibility == INVISIBLE) chipBlue4.isClickable = false
+                    if (!chipBlue1.isClickable && !chipBlue2.isClickable && !chipBlue3.isClickable && !chipBlue4.isClickable || blue == 0) {
+                        setDiceClickable()
+                    }
+                }
+            }
+            binding.diceRed -> {
+                n = rollDice(binding.diceRed)
+                val pt = PlayerNo
+                setClickableFalse()
+                diceRed.isClickable = false
+                if (PlayerNo % 4 == 3) {
+                    if (red1 == 1) {
+                        chipRed1.setOnClickListener(this)
+                    }
+                    if (red2 == 1) {
+                        chipRed2.setOnClickListener(this)
+                    }
+                    if (red3 == 1) {
+                        chipRed3.setOnClickListener(this)
+                    }
+                    if (red4 == 1) {
+                        chipRed4.setOnClickListener(this)
+                    }
+                    when (n) {
+                        6 -> {
+                            red = 1
+                            chipRed1.setOnClickListener(this)
+                            chipRed2.setOnClickListener(this)
+                            chipRed3.setOnClickListener(this)
+                            chipRed4.setOnClickListener(this)
+                        }
+                        else -> {
+                            PlayerNo++
+                        }
+                    }
+                    n1 = n + x5 - 12
+                    n2 = n + x6 - 12
+                    n3 = n + x7 - 12
+                    n4 = n + x8 - 12
+
+                    if (n1 == 6 && chipRed1.top < top + 7 * d && chipRed1.left == 7 * d) {
+                        chipRed1.visibility = INVISIBLE
+                        PlayerNo = pt
+                        x5 = 0
+                        setDiceClickable()
+                    }
+                    if (n2 == 6 && chipRed2.top < top +7 * d && chipRed2.left == 7 * d) {
+                        chipRed2.visibility = INVISIBLE
+                        PlayerNo = pt
+                        x6 = 0
+                        setDiceClickable()
+                    }
+                    if (n3 == 6 && chipRed3.top < top + 7 * d && chipRed3.left == 7 * d) {
+                        chipRed3.visibility = INVISIBLE
+                        PlayerNo = pt
+                        x7 = 0
+                        setDiceClickable()
+                    }
+                    if (n4 == 6 && chipRed4.top < top + 7 * d && chipRed4.left == 7 * d) {
+                        chipRed4.visibility = INVISIBLE
+                        PlayerNo = pt
+                        x8 = 0
+                        setDiceClickable()
+                    }
+                    if (n1 > 5 && chipRed1.top < top + 7 * d && chipRed1.left == 7 * d || chipRed1.visibility == INVISIBLE) chipRed1.isClickable = false
+                    if (n2 > 5 && chipRed2.top < top + 7 * d && chipRed2.left == 7 * d || chipRed2.visibility == INVISIBLE) chipRed2.isClickable = false
+                    if (n3 > 5 && chipRed3.top < top + 7 * d && chipRed3.left == 7 * d || chipRed3.visibility == INVISIBLE) chipRed3.isClickable = false
+                    if (n4 > 5 && chipRed4.top < top + 7 * d && chipRed4.left == 7 * d || chipRed4.visibility == INVISIBLE) chipRed4.isClickable = false
+                    if (!chipRed1.isClickable && !chipRed2.isClickable && !chipRed3.isClickable && !chipRed4.isClickable || red == 0) {
+                        setDiceClickable()
+                    }
+                }
+            }
+        }
+//        if (chipGreen1.visibility == INVISIBLE && chipGreen2.visibility == INVISIBLE && chipGreen3.visibility == INVISIBLE && chipGreen4.visibility == INVISIBLE) {
+//            val intent = Intent(this, winRed::class.java)
+//            startActivity(intent)
+//        }
+//        if (chipYellow1.visibility == INVISIBLE && chipYellow2.visibility == INVISIBLE && chipYellow3.visibility == INVISIBLE && chipYellow4.visibility == INVISIBLE) {
+//            val intent = Intent(this, winGreen::class.java)
+//            startActivity(intent)
+//        }
+//        if (chipBlue1.visibility == INVISIBLE && chipBlue2.visibility == INVISIBLE && chipBlue3.visibility == INVISIBLE && chipBlue4.visibility == INVISIBLE) {
+//            //game won by playerthree
+//            val intent = Intent(this, winBlue::class.java)
+//            startActivity(intent)
+//        }
+//        if (chipRed1.visibility == INVISIBLE && chipRed2.visibility == INVISIBLE && chipRed3.visibility == INVISIBLE && chipRed4.visibility == INVISIBLE) {
+//            //game won by playerfour
+//            val intent = Intent(this, winYellow::class.java)
+//            startActivity(intent)
+//        }
+    }
+
+    private fun setDiceClickable() {
+        setClickableFalse()
+        diceGreen.isClickable = true
+        diceYellow.isClickable = true
+        diceRed.isClickable = true
+        diceBlue.isClickable = true
+        diceGreen.setOnClickListener(this)
+        diceYellow.setOnClickListener(this)
+        diceRed.setOnClickListener(this)
+        diceBlue.setOnClickListener(this)
+        when (PlayerNo % 4) {
+            1 -> {
+                diceGreen.visibility = VISIBLE
+                diceYellow.visibility = INVISIBLE
+                diceRed.visibility = INVISIBLE
+                diceBlue.visibility = INVISIBLE
+            }
+            2 -> {
+                diceGreen.visibility = INVISIBLE
+                diceYellow.visibility = VISIBLE
+                diceRed.visibility = INVISIBLE
+                diceBlue.visibility = INVISIBLE
+            }
+            3 -> {
+                diceGreen.visibility = INVISIBLE
+                diceYellow.visibility = INVISIBLE
+                diceRed.visibility = VISIBLE
+                diceBlue.visibility = INVISIBLE
+            }
+            0 -> {
+                diceGreen.visibility = INVISIBLE
+                diceYellow.visibility = INVISIBLE
+                diceRed.visibility = INVISIBLE
+                diceBlue.visibility = VISIBLE
+            }
+        }
+    }
+
+    private fun setClickableFalse() {
+        chipGreen1.isClickable = false
+        chipGreen2.isClickable = false
+        chipGreen3.isClickable = false
+        chipGreen4.isClickable = false
+        chipYellow1.isClickable = false
+        chipYellow2.isClickable = false
+        chipYellow3.isClickable = false
+        chipYellow4.isClickable = false
+        chipRed1.isClickable = false
+        chipRed2.isClickable = false
+        chipRed3.isClickable = false
+        chipRed4.isClickable = false
+        chipBlue1.isClickable = false
+        chipBlue2.isClickable = false
+        chipBlue3.isClickable = false
+        chipBlue4.isClickable = false
+    }
+
+    private fun startGame() {
+        PlayerNo = 1
+        setDiceClickable()
+    }
+
+//    private fun otherHome(x: Int, chipX: ImageView): Int {
+//        var x = x
+//        setDiceClickable()
+//        val mParams =
+//    }
+
+    private fun positionOf(x: Int, chipX: ImageView): Int {
+        var x = x
+        setDiceClickable()
+        val mParams = chipX.layoutParams as RelativeLayout.LayoutParams
+        x += n
+        if (chipX == binding.chipGreen1 || chipX == binding.chipGreen2 || chipX == binding.chipGreen3 || chipX == binding.chipGreen4 || chipX == binding.chipBlue1 || chipX == binding.chipBlue2 || chipX == binding.chipBlue3 || chipX == binding.chipBlue4 || chipX == binding.chipRed1 || chipX == binding.chipRed2 || chipX == binding.chipRed3 || chipX == binding.chipRed4) {
+            if (x > 52) x -= 52
+        }
+        if (chipX == binding.chipYellow1 || chipX == binding.chipYellow2 || chipX == binding.chipYellow3 || chipX == binding.chipYellow4) {
+            extraN = x - 51
+            if (x > 51) {
+                when (extraN) {
+                    1 -> {
+                        mParams.leftMargin = d
+                        mParams.topMargin = top + 7 * d
+                    }
+                    2 -> {
+                        mParams.leftMargin = 2 * d
+                        mParams.topMargin = top + 7 * d
+                    }
+                    3 -> {
+                        mParams.leftMargin = 3 * d
+                        mParams.topMargin = top + 7 * d
+                    }
+                    4 -> {
+                        mParams.leftMargin = 4 * d
+                        mParams.topMargin = top + 7 * d
+                    }
+                    5 -> {
+                        mParams.leftMargin = 5 * d
+                        mParams.topMargin = top + 7 * d
+                    }
+                }
+                chipX.layoutParams = mParams
+            } else theCase(x, chipX)
+        } else if (chipX == binding.chipRed1 || chipX == binding.chipRed2 || chipX == binding.chipRed3 || chipX == binding.chipRed4) {
+            if (mParams.leftMargin <= 7 * d && x > 12 && x < 24) {
+                extraN = x - 12
+                when (extraN) {
+                    1 -> {
+                        mParams.leftMargin = 7 * d
+                        mParams.topMargin = top + d
+                    }
+                    2 -> {
+                        mParams.leftMargin = 7 * d
+                        mParams.topMargin = top + 2 * d
+                    }
+                    3 -> {
+                        mParams.leftMargin = 7 * d
+                        mParams.topMargin = top + 3 * d
+                    }
+                    4 -> {
+                        mParams.leftMargin = 7 * d
+                        mParams.topMargin = top + 4 * d
+                    }
+                    5 -> {
+                        mParams.leftMargin = 7 * d
+                        mParams.topMargin = top + 5 * d
+                    }
+                }
+                chipX.layoutParams = mParams
+            } else theCase(x, chipX)
+        } else if (chipX == binding.chipBlue1 || chipX == binding.chipBlue2 || chipX == binding.chipBlue3 || chipX == binding.chipBlue4) {
+            extraN = x - 25
+            if (mParams.topMargin <= top + 7 * d && x > 25) {
+                when (extraN) {
+                    1 -> {
+                        mParams.leftMargin = 13 * d
+                        mParams.topMargin = top + 7 * d
+                    }
+                    2 -> {
+                        mParams.leftMargin = 12 * d
+                        mParams.topMargin = top + 7 * d
+                    }
+                    3 -> {
+                        mParams.leftMargin = 11 * d
+                        mParams.topMargin = top + 7 * d
+                    }
+                    4 -> {
+                        mParams.leftMargin = 10 * d
+                        mParams.topMargin = top + 7 * d
+                    }
+                    5 -> {
+                        mParams.leftMargin = 9 * d
+                        mParams.topMargin = top + 7 * d
+                    }
+                }
+                chipX.layoutParams = mParams
+            } else theCase(x, chipX)
+        } else if (chipX == binding.chipGreen1 || chipX == binding.chipGreen2 || chipX == binding.chipGreen3 || chipX == binding.chipGreen4) {
+            extraN = x - 38
+            if (mParams.leftMargin >= 7 * d && x > 38) {
+                when (extraN) {
+                    1 -> {
+                        mParams.leftMargin = 7 * d
+                        mParams.topMargin = top + 13 * d
+                    }
+                    2 -> {
+                        mParams.leftMargin = 7 * d
+                        mParams.topMargin = top + 12 * d
+                    }
+                    3 -> {
+                        mParams.leftMargin = 7 * d
+                        mParams.topMargin = top + 11 * d
+                    }
+                    4 -> {
+                        mParams.leftMargin = 7 * d
+                        mParams.topMargin = top + 10 * d
+                    }
+                    5 -> {
+                        mParams.leftMargin = 7 * d
+                        mParams.topMargin = top + 9 * d
+                    }
+                }
+                chipX.layoutParams = mParams
+            } else theCase(x, chipX)
+        }
+        return x
+    }
+
+    private fun theCase(p: Int, pp: ImageView) {
+        val mParams = pp.layoutParams as RelativeLayout.LayoutParams
+        when (p) {
+            1 -> {
+                mParams.leftMargin = d
+                mParams.topMargin = top + 6 * d
+            }
+            2 -> {
+                mParams.leftMargin = 2 * d
+                mParams.topMargin = top + 6 * d
+            }
+            3 -> {
+                mParams.leftMargin = 3 * d
+                mParams.topMargin = top + 6 * d
+            }
+            4 -> {
+                mParams.leftMargin = 4 * d
+                mParams.topMargin = top + 6 * d
+            }
+            5 -> {
+                mParams.leftMargin = 5 * d
+                mParams.topMargin = top + 6 * d
+            }
+            6 -> {
+                mParams.leftMargin = 6 * d
+                mParams.topMargin = top + 5 * d
+            }
+            7 -> {
+                mParams.leftMargin = 6 * d
+                mParams.topMargin = top + 4 * d
+            }
+            8 -> {
+                mParams.leftMargin = 6 * d
+                mParams.topMargin = top + 3 * d
+            }
+            9 -> {
+                mParams.leftMargin = 6 * d
+                mParams.topMargin = top + 2 * d
+            }
+            10 -> {
+                mParams.leftMargin = 6 * d
+                mParams.topMargin = top + d
+            }
+            11 -> {
+                mParams.leftMargin = 6 * d
+                mParams.topMargin = top
+            }
+            12 -> {
+                mParams.leftMargin = 7 * d
+                mParams.topMargin = top
+            }
+            13 -> {
+                mParams.leftMargin = 8 * d
+                mParams.topMargin = top
+            }
+            14 -> {
+                mParams.leftMargin = 8 * d
+                mParams.topMargin = top + d
+            }
+            15 -> {
+                mParams.leftMargin = 8 * d
+                mParams.topMargin = top + 2 * d
+            }
+            16 -> {
+                mParams.leftMargin = 8 * d
+                mParams.topMargin = top + 3 * d
+            }
+            17 -> {
+                mParams.leftMargin = 8 * d
+                mParams.topMargin = top + 4 * d
+            }
+            18 -> {
+                mParams.leftMargin = 8 * d
+                mParams.topMargin = top + 5 * d
+            }
+            19 -> {
+                mParams.leftMargin = 9 * d
+                mParams.topMargin = top + 6 * d
+            }
+            20 -> {
+                mParams.leftMargin = 10 * d
+                mParams.topMargin = top + 6 * d
+            }
+            21 -> {
+                mParams.leftMargin = 11 * d
+                mParams.topMargin = top + 6 * d
+            }
+            22 -> {
+                mParams.leftMargin = 12 * d
+                mParams.topMargin = top + 6 * d
+            }
+            23 -> {
+                mParams.leftMargin = 13 * d
+                mParams.topMargin = top + 6 * d
+            }
+            24 -> {
+                mParams.leftMargin = 14 * d
+                mParams.topMargin = top + 6 * d
+            }
+            25 -> {
+                mParams.leftMargin = 14 * d
+                mParams.topMargin = top + 7 * d
+            }
+            26 -> {
+                mParams.leftMargin = 14 * d
+                mParams.topMargin = top + 8 * d
+            }
+            27 -> {
+                mParams.leftMargin = 13 * d
+                mParams.topMargin = top + 8 * d
+            }
+            28 -> {
+                mParams.leftMargin = 12 * d
+                mParams.topMargin = top + 8 * d
+            }
+            29 -> {
+                mParams.leftMargin = 11 * d
+                mParams.topMargin = top + 8 * d
+            }
+            30 -> {
+                mParams.leftMargin = 10 * d
+                mParams.topMargin = top + 8 * d
+            }
+            31 -> {
+                mParams.leftMargin = 9 * d
+                mParams.topMargin = top + 8 * d
+            }
+            32 -> {
+                mParams.leftMargin = 8 * d
+                mParams.topMargin = top + 9 * d
+            }
+            33 -> {
+                mParams.leftMargin = 8 * d
+                mParams.topMargin = top + 10 * d
+            }
+            34 -> {
+                mParams.leftMargin = 8 * d
+                mParams.topMargin = top + 11 * d
+            }
+            35 -> {
+                mParams.leftMargin = 8 * d
+                mParams.topMargin = top + 12 * d
+            }
+            36 -> {
+                mParams.leftMargin = 8 * d
+                mParams.topMargin = top + 13 * d
+            }
+            37 -> {
+                mParams.leftMargin = 8 * d
+                mParams.topMargin = top + 14 * d
+            }
+            38 -> {
+                mParams.leftMargin = 7 * d
+                mParams.topMargin = top + 14 * d
+            }
+            39 -> {
+                mParams.leftMargin = 6 * d
+                mParams.topMargin = top + 14 * d
+            }
+            40 -> {
+                mParams.leftMargin = 6 * d
+                mParams.topMargin = top + 13 * d
+            }
+            41 -> {
+                mParams.leftMargin = 6 * d
+                mParams.topMargin = top + 12 * d
+            }
+            42 -> {
+                mParams.leftMargin = 6 * d
+                mParams.topMargin = top + 11 * d
+            }
+            43 -> {
+                mParams.leftMargin = 6 * d
+                mParams.topMargin = top + 10 * d
+            }
+            44 -> {
+                mParams.leftMargin = 6 * d
+                mParams.topMargin = top + 9 * d
+            }
+            45 -> {
+                mParams.leftMargin = 5 * d
+                mParams.topMargin = top + 8 * d
+            }
+            46 -> {
+                mParams.leftMargin = 4 * d
+                mParams.topMargin = top + 8 * d
+            }
+            47 -> {
+                mParams.leftMargin = 3 * d
+                mParams.topMargin = top + 8 * d
+            }
+            48 -> {
+                mParams.leftMargin = 2 * d
+                mParams.topMargin = top + 8 * d
+            }
+            49 -> {
+                mParams.leftMargin = d
+                mParams.topMargin = top + 8 * d
+            }
+            50 -> {
+                mParams.leftMargin = 0
+                mParams.topMargin = top + 8 * d
+            }
+            51 -> {
+                mParams.leftMargin = 0
+                mParams.topMargin = top + 7 * d
+            }
+            52 -> {
+                mParams.leftMargin = 0
+                mParams.topMargin = top + 6 * d
+            }
+        }
+        pp.layoutParams = mParams
+    }
+
+    private fun checkPosition(v: ImageView) {
+        val mP = v.layoutParams as RelativeLayout.LayoutParams
+        if (v == binding.chipYellow1 || v == binding.chipYellow2 || v == binding.chipYellow3 || v == binding.chipYellow4) {
+            val lm1: Int = chipRed1.left
+            val tm1: Int = chipRed1.top
+            if (lm1 == mP.leftMargin && tm1 == mP.topMargin) {
+                fillRed(chipRed1)
+            }
+            val lm2: Int = chipRed2.left
+            val tm2: Int = chipRed2.top
+            if (lm2 == mP.leftMargin && tm2 == mP.topMargin) {
+                fillRed(chipRed2)
+            }
+            val lm3: Int = chipRed3.left
+            val tm3: Int = chipRed3.top
+            if (lm3 == mP.leftMargin && tm3 == mP.topMargin) {
+                fillRed(chipRed3)
+            }
+            val lm4: Int = chipRed4.left
+            val tm4: Int = chipRed4.top
+            if (lm4 == mP.leftMargin && tm4 == mP.topMargin) {
+                fillRed(chipRed4)
+            }
+            val lm5: Int = chipBlue1.left
+            val tm5: Int = chipBlue1.top
+            if (lm5 == mP.leftMargin && tm5 == mP.topMargin) {
+                fillBlue(chipBlue1)
+            }
+            val lm6: Int = chipBlue2.left
+            val tm6: Int = chipBlue2.top
+            if (lm6 == mP.leftMargin && tm6 == mP.topMargin) {
+                fillBlue(chipBlue2)
+            }
+            val lm7: Int = chipBlue3.left
+            val tm7: Int = chipBlue3.top
+            if (lm7 == mP.leftMargin && tm7 == mP.topMargin) {
+                fillBlue(chipBlue3)
+            }
+            val lm8: Int = chipBlue4.left
+            val tm8: Int = chipBlue4.top
+            if (lm8 == mP.leftMargin && tm8 == mP.topMargin) {
+                fillBlue(chipBlue4)
+            }
+            val lm9: Int = chipGreen1.left
+            val tm9: Int = chipGreen1.top
+            if (lm9 == mP.leftMargin && tm9 == mP.topMargin) {
+                fillGreen(chipGreen1)
+            }
+            val lm10: Int = chipGreen2.left
+            val tm10: Int = chipGreen2.top
+            if (lm10 == mP.leftMargin && tm10 == mP.topMargin) {
+                fillGreen(chipGreen2)
+            }
+            val lm11: Int = chipGreen3.left
+            val tm11: Int = chipGreen3.top
+            if (lm11 == mP.leftMargin && tm11 == mP.topMargin) {
+                fillGreen(chipGreen3)
+            }
+            val lm12: Int = chipGreen4.left
+            val tm12: Int = chipGreen4.top
+            if (lm12 == mP.leftMargin && tm12 == mP.topMargin) {
+                fillGreen(chipGreen4)
+            }
+        }
+        if (v == binding.chipRed1 || v == binding.chipRed2 || v == binding.chipRed3 || v == binding.chipRed4) {
+            val lm1: Int = chipYellow1.left
+            val tm1: Int = chipYellow1.top
+            if (lm1 == mP.leftMargin && tm1 == mP.topMargin) {
+                fillYellow(chipYellow1)
+            }
+            val lm2: Int = chipYellow2.left
+            val tm2: Int = chipYellow2.top
+            if (lm2 == mP.leftMargin && tm2 == mP.topMargin) {
+                fillYellow(chipYellow2)
+            }
+            val lm3: Int = chipYellow3.left
+            val tm3: Int = chipYellow3.top
+            if (lm3 == mP.leftMargin && tm3 == mP.topMargin) {
+                fillYellow(chipYellow3)
+            }
+            val lm4: Int = chipYellow4.left
+            val tm4: Int = chipYellow4.top
+            if (lm4 == mP.leftMargin && tm4 == mP.topMargin) {
+                fillYellow(chipYellow4)
+            }
+            val lm5: Int = chipBlue1.left
+            val tm5: Int = chipBlue1.top
+            if (lm5 == mP.leftMargin && tm5 == mP.topMargin) {
+                fillBlue(chipBlue1)
+            }
+            val lm6: Int = chipBlue2.left
+            val tm6: Int = chipBlue2.top
+            if (lm6 == mP.leftMargin && tm6 == mP.topMargin) {
+                fillBlue(chipBlue2)
+            }
+            val lm7: Int = chipBlue3.left
+            val tm7: Int = chipBlue3.top
+            if (lm7 == mP.leftMargin && tm7 == mP.topMargin) {
+                fillBlue(chipBlue3)
+            }
+            val lm8: Int = chipBlue4.left
+            val tm8: Int = chipBlue4.top
+            if (lm8 == mP.leftMargin && tm8 == mP.topMargin) {
+                fillBlue(chipBlue4)
+            }
+            val lm9: Int = chipGreen1.left
+            val tm9: Int = chipGreen1.top
+            if (lm9 == mP.leftMargin && tm9 == mP.topMargin) {
+                fillGreen(chipGreen1)
+            }
+            val lm10: Int = chipGreen2.left
+            val tm10: Int = chipGreen2.top
+            if (lm10 == mP.leftMargin && tm10 == mP.topMargin) {
+                fillGreen(chipGreen2)
+            }
+            val lm11: Int = chipGreen3.left
+            val tm11: Int = chipGreen3.top
+            if (lm11 == mP.leftMargin && tm11 == mP.topMargin) {
+                fillGreen(chipGreen3)
+            }
+            val lm12: Int = chipGreen4.left
+            val tm12: Int = chipGreen4.top
+            if (lm12 == mP.leftMargin && tm12 == mP.topMargin) {
+                fillGreen(chipGreen4)
+            }
+        }
+        if (v == binding.chipBlue1 || v == binding.chipBlue2 || v == binding.chipBlue3 || v == binding.chipBlue4) {
+            val lm1: Int = chipYellow1.left
+            val tm1: Int = chipYellow1.top
+            if (lm1 == mP.leftMargin && tm1 == mP.topMargin) {
+                fillYellow(chipYellow1)
+            }
+            val lm2: Int = chipYellow2.left
+            val tm2: Int = chipYellow2.top
+            if (lm2 == mP.leftMargin && tm2 == mP.topMargin) {
+                fillYellow(chipYellow2)
+            }
+            val lm3: Int = chipYellow3.left
+            val tm3: Int = chipYellow3.top
+            if (lm3 == mP.leftMargin && tm3 == mP.topMargin) {
+                fillYellow(chipYellow3)
+            }
+            val lm4: Int = chipYellow4.left
+            val tm4: Int = chipYellow4.top
+            if (lm4 == mP.leftMargin && tm4 == mP.topMargin) {
+                fillYellow(chipYellow4)
+            }
+            val lm5: Int = chipRed1.left
+            val tm5: Int = chipRed1.top
+            if (lm5 == mP.leftMargin && tm5 == mP.topMargin) {
+                fillRed(chipRed1)
+            }
+            val lm6: Int = chipRed2.left
+            val tm6: Int = chipRed2.top
+            if (lm6 == mP.leftMargin && tm6 == mP.topMargin) {
+                fillRed(chipRed2)
+            }
+            val lm7: Int = chipRed3.left
+            val tm7: Int = chipRed3.top
+            if (lm7 == mP.leftMargin && tm7 == mP.topMargin) {
+                fillRed(chipRed3)
+            }
+            val lm8: Int = chipRed4.left
+            val tm8: Int = chipRed4.top
+            if (lm8 == mP.leftMargin && tm8 == mP.topMargin) {
+                fillRed(chipRed4)
+            }
+            val lm9: Int = chipGreen1.left
+            val tm9: Int = chipGreen1.top
+            if (lm9 == mP.leftMargin && tm9 == mP.topMargin) {
+                fillGreen(chipGreen1)
+            }
+            val lm10: Int = chipGreen2.left
+            val tm10: Int = chipGreen2.top
+            if (lm10 == mP.leftMargin && tm10 == mP.topMargin) {
+                fillGreen(chipGreen2)
+            }
+            val lm11: Int = chipGreen3.left
+            val tm11: Int = chipGreen3.top
+            if (lm11 == mP.leftMargin && tm11 == mP.topMargin) {
+                fillGreen(chipGreen3)
+            }
+            val lm12: Int = chipGreen4.left
+            val tm12: Int = chipGreen4.top
+            if (lm12 == mP.leftMargin && tm12 == mP.topMargin) {
+                fillGreen(chipGreen4)
+            }
+        }
+        if (v == binding.chipGreen1 || v == binding.chipGreen2 || v == binding.chipGreen3 || v == binding.chipGreen4) {
+            val lm1: Int = chipYellow1.left
+            val tm1: Int = chipYellow1.top
+            if (lm1 == mP.leftMargin && tm1 == mP.topMargin) {
+                fillYellow(chipYellow1)
+            }
+            val lm2: Int = chipYellow2.left
+            val tm2: Int = chipYellow2.top
+            if (lm2 == mP.leftMargin && tm2 == mP.topMargin) {
+                fillYellow(chipYellow2)
+            }
+            val lm3: Int = chipYellow3.left
+            val tm3: Int = chipYellow3.top
+            if (lm3 == mP.leftMargin && tm3 == mP.topMargin) {
+                fillYellow(chipYellow3)
+            }
+            val lm4: Int = chipYellow4.left
+            val tm4: Int = chipYellow4.top
+            if (lm4 == mP.leftMargin && tm4 == mP.topMargin) {
+                fillYellow(chipYellow4)
+            }
+            val lm5: Int = chipRed1.left
+            val tm5: Int = chipRed1.top
+            if (lm5 == mP.leftMargin && tm5 == mP.topMargin) {
+                fillRed(chipRed1)
+            }
+            val lm6: Int = chipRed2.left
+            val tm6: Int = chipRed2.top
+            if (lm6 == mP.leftMargin && tm6 == mP.topMargin) {
+                fillRed(chipRed2)
+            }
+            val lm7: Int = chipRed3.left
+            val tm7: Int = chipRed3.top
+            if (lm7 == mP.leftMargin && tm7 == mP.topMargin) {
+                fillRed(chipRed3)
+            }
+            val lm8: Int = chipRed4.left
+            val tm8: Int = chipRed4.top
+            if (lm8 == mP.leftMargin && tm8 == mP.topMargin) {
+                fillRed(chipRed4)
+            }
+            val lm9: Int = chipBlue1.left
+            val tm9: Int = chipBlue1.top
+            if (lm9 == mP.leftMargin && tm9 == mP.topMargin) {
+                fillBlue(chipBlue1)
+            }
+            val lm10: Int = chipBlue2.left
+            val tm10: Int = chipBlue2.top
+            if (lm10 == mP.leftMargin && tm10 == mP.topMargin) {
+                fillBlue(chipBlue2)
+            }
+            val lm11: Int = chipBlue3.left
+            val tm11: Int = chipBlue3.top
+            if (lm11 == mP.leftMargin && tm11 == mP.topMargin) {
+                fillBlue(chipBlue3)
+            }
+            val lm12: Int = chipBlue4.left
+            val tm12: Int = chipBlue4.top
+            if (lm12 == mP.leftMargin && tm12 == mP.topMargin) {
+                fillBlue(chipBlue4)
+            }
+        }
+    }
+
+    private fun rollDice(diceImage: ImageView): Int {
         // Create new Dice object with 6 sides and roll it.
         val dice = Dice(6)
         val diceRoll = dice.roll()
@@ -460,6 +1584,7 @@ class GameOfflineActivity : AppCompatActivity() {
 
         // Update the imageView with the correct drawable resource ID
         diceImage.setImageResource(drawableResource)
+        return diceRoll
     }
 }
 
