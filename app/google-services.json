@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "528750267907",
+    "project_id": "sunu-ludo",
+    "storage_bucket": "sunu-ludo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528750267907:android:22a50eb54aad8fe1d90836",
+        "android_client_info": {
+          "package_name": "com.example.sunuludo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528750267907-v60i2uvse5vnmqt6m1vhe73ipqje6up8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkzFAN1OMUQRkDeP8UQ5Ta7j_bdfg77D0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528750267907-v60i2uvse5vnmqt6m1vhe73ipqje6up8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

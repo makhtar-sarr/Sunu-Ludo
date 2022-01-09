@@ -9,11 +9,28 @@
             type="com.example.sunuludo.models.Game" />
     </data>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg3"
+        android:background="@color/contentBodyColor"
         tools:context=".views.GameOfflineActivity">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_topbk"
+            android:layout_gravity="top" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:rotation="-180"
+            android:src="@drawable/ic_topbk"
+            android:layout_alignBottom="@id/ludo_board" />
 
         <ImageView
             android:id="@+id/ludo_board"
@@ -84,8 +101,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textColor="@color/whiteTextColor"
+                android:textSize="18sp" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -150,8 +167,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:textColor="@color/white"
-                android:textSize="12sp"/>
+                android:textColor="@color/whiteTextColor"
+                android:textSize="18sp" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -187,6 +204,14 @@
             android:layout_gravity="top"
             tools:ignore="ContentDescription" />
 
+        <!--<ImageView
+            android:id="@+id/arrow_yellow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_yellow"
+            android:layout_gravity="top"
+            tools:ignore="ContentDescription" />-->
+
         <ImageView
             android:id="@+id/box_dice_yellow"
             android:layout_width="60dp"
@@ -217,8 +242,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:textColor="@color/black"
-                android:textSize="12sp"/>
+                android:textColor="@color/whiteTextColor"
+                android:textSize="18sp"/>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -284,8 +309,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:textColor="@color/white"
-                android:textSize="12sp"/>
+                android:textColor="@color/whiteTextColor"
+                android:textSize="18sp"/>
 
         </com.google.android.material.card.MaterialCardView>
 

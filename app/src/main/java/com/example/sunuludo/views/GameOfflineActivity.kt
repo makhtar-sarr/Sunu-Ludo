@@ -7,16 +7,18 @@ import android.view.View.VISIBLE
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.databinding.DataBindingUtil
 import com.example.sunuludo.R
 import com.example.sunuludo.databinding.ActivityGameOfflineBinding
+import com.example.sunuludo.models.Game
 
 class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityGameOfflineBinding
 
-    //val EXTRA_MESSAGE = "com.example.android.sunuludo.extra.MESSAGE"
+    val EXTRA_MESSAGE = "com.example.android.sunuludo.extra.MESSAGE"
     var height = 0
     var width: Int = 0
     var top: Int = 0
@@ -99,13 +101,13 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_game_offline)
-//        val intentGameOfflineActivity = intent
-//        val game = intentGameOfflineActivity.getSerializableExtra(EXTRA_MESSAGE) as Game
+        val intentGameOfflineActivity = intent
+        val game = intentGameOfflineActivity.getSerializableExtra(EXTRA_MESSAGE) as Game
 
-//        binding.greenPlayer.text = game.playerGreen
-//        binding.yellowPlayer.text = game.playerYellow
-//        binding.redPlayer.text = game.playerRed
-//        binding.bluePlayer.text = game.playerBlue
+        binding.greenPlayer.text = game.playerGreen
+        binding.yellowPlayer.text = game.playerYellow
+        binding.redPlayer.text = game.playerRed
+        binding.bluePlayer.text = game.playerBlue
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -178,12 +180,6 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun fillDice(dice: ImageView, diceBox: ImageView) {
-//        dice.getLayoutParams().height = 3 * d
-//        dice.getLayoutParams().width = 3 * d
-//        val mParams = dice.getLayoutParams() as RelativeLayout.LayoutParams
-//        mParams.leftMargin = 6 * d
-//        mParams.topMargin = width + 5 * d //top + 6 * d
-//        dice.setLayoutParams(mParams)
         when (diceBox) {
             binding.boxDiceGreen -> {
                 val mParamsGreenBox = boxDiceGreen.layoutParams as RelativeLayout.LayoutParams
@@ -1098,7 +1094,7 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
                         red1 = 1
                     }
                     2 -> {
-                        fillYellow(chipRed1)
+                        fillRed(chipRed1)
                         setDiceClickable()
                     }
                     else -> x5 = positionOf(x5, chipRed1)
@@ -1115,7 +1111,7 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
                         red2 = 1
                     }
                     2 -> {
-                        fillYellow(chipRed2)
+                        fillRed(chipRed2)
                         setDiceClickable()
                     }
                     else -> x6 = positionOf(x6, chipRed2)
@@ -1132,7 +1128,7 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
                         red3 = 1
                     }
                     2 -> {
-                        fillYellow(chipRed3)
+                        fillRed(chipRed3)
                         setDiceClickable()
                     }
                     else -> x7 = positionOf(x7, chipRed3)
@@ -1140,16 +1136,20 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
                 checkPosition(chipRed3)
             }
             binding.chipRed4 -> {
-                if (red4 == 0) {
-                    mP.leftMargin = 8 * d
-                    mP.topMargin = top + d
-                    chip.layoutParams = mP
-                    setDiceClickable()
-                    red4 = 1
-                } else if (red4 == 2) {
-                    fillYellow(chipRed4)
-                    setDiceClickable()
-                } else x8 = positionOf(x8, chipRed4)
+                when (red4) {
+                    0 -> {
+                        mP.leftMargin = 8 * d
+                        mP.topMargin = top + d
+                        chip.layoutParams = mP
+                        setDiceClickable()
+                        red4 = 1
+                    }
+                    2 -> {
+                        fillRed(chipRed4)
+                        setDiceClickable()
+                    }
+                    else -> x8 = positionOf(x8, chipRed4)
+                }
                 checkPosition(chipRed4)
             }
             binding.chipBlue1 -> {
@@ -1162,7 +1162,7 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
                         blue1 = 1
                     }
                     2 -> {
-                        fillYellow(chipBlue1)
+                        fillBlue(chipBlue1)
                         setDiceClickable()
                     }
                     else -> x9 = positionOf(x9, chipBlue1)
@@ -1179,7 +1179,7 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
                         blue2 = 1
                     }
                     2 -> {
-                        fillYellow(chipBlue2)
+                        fillBlue(chipBlue2)
                         setDiceClickable()
                     }
                     else -> x10 = positionOf(x10, chipBlue2)
@@ -1196,7 +1196,7 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
                         blue3 = 1
                     }
                     2 -> {
-                        fillYellow(chipBlue3)
+                        fillBlue(chipBlue3)
                         setDiceClickable()
                     }
                     else -> x11 = positionOf(x11, chipBlue3)
@@ -1212,7 +1212,7 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
                         blue4 = 1
                     }
                     2 -> {
-                        fillYellow(chipBlue4)
+                        fillBlue(chipBlue4)
                         setDiceClickable()
                     }
                     else -> x12 = positionOf(x12, chipBlue4)
@@ -1222,7 +1222,6 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
 
             binding.diceGreen -> {
                 n = rollDice(binding.diceGreen)
-                //                Toast.makeText(getApplicationContext(), n + "was obtained", Toast.LENGTH_SHORT).show();
                 val pt = PlayerNo
                 setClickableFalse()
                 diceGreen.isClickable = false
@@ -1259,26 +1258,26 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
                     if (n1 == 6 && chipGreen1.top > top + 6 * d && chipGreen1.left == 7 * d) {
                         chipGreen1.visibility = INVISIBLE
                         x13 = 0
-                        setDiceClickable()
                         PlayerNo = pt
+                        setDiceClickable()
                     }
                     if (n2 == 6 && chipGreen2.top > top + 6 * d && chipGreen2.left == 7 * d) {
                         chipGreen2.visibility = INVISIBLE
                         x14 = 0
-                        setDiceClickable()
                         PlayerNo = pt
+                        setDiceClickable()
                     }
                     if (n3 == 6 && chipGreen3.top > top + 6 * d && chipGreen3.left == 7 * d) {
                         chipGreen3.visibility = INVISIBLE
                         x15 = 0
-                        setDiceClickable()
                         PlayerNo = pt
+                        setDiceClickable()
                     }
                     if (n4 == 6 && chipGreen4.top > top + 6 * d && chipGreen4.left == 7 * d) {
                         chipGreen4.visibility = INVISIBLE
                         x16 = 0
-                        setDiceClickable()
                         PlayerNo = pt
+                        setDiceClickable()
                     }
 
                     if (n1 > 5 && chipGreen1.top > top + 6 * d && chipGreen1.left == 7 * d || chipGreen1.visibility == INVISIBLE) chipGreen1.isClickable = false
@@ -1328,27 +1327,28 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
                     if (n1 == 6) {
                         chipYellow1.visibility = INVISIBLE
                         x1 = 0
-                        setDiceClickable()
                         PlayerNo = pt
+                        setDiceClickable()
                     }
                     if (n2 == 6) {
                         chipYellow2.visibility = INVISIBLE
-                            x2 = 0
-                        setDiceClickable()
+                        x2 = 0
                         PlayerNo = pt
+                        setDiceClickable()
                     }
                     if (n3 == 6) {
                         chipYellow3.visibility = INVISIBLE
                         x3 = 0
-                        setDiceClickable()
                         PlayerNo = pt
+                        setDiceClickable()
                     }
                     if (n4 == 6) {
                         chipYellow4.visibility = INVISIBLE
                         x4 = 0
-                        setDiceClickable()
                         PlayerNo = pt
+                        setDiceClickable()
                     }
+
                     if (n1 > 5 || chipYellow1.visibility == INVISIBLE) chipYellow1.isClickable = false
                     if (n2 > 5 || chipYellow2.visibility == INVISIBLE) chipYellow2.isClickable = false
                     if (n3 > 5 || chipYellow3.visibility == INVISIBLE) chipYellow3.isClickable = false
@@ -1392,10 +1392,11 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
                     n2 = n + x10 - 25
                     n3 = n + x11 - 25
                     n4 = n + x12 - 25
+
                     if (n1 == 6 && chipBlue1.left > 7 * d && chipBlue1.top == top + 7 * d) {
                         chipBlue1.visibility = INVISIBLE
-                        PlayerNo = pt
                         x9 = 0
+                        PlayerNo = pt
                         setDiceClickable()
                     }
                     if (n2 == 6 && chipBlue2.left > 7 * d && chipBlue2.top == top + 7 * d) {
@@ -1406,16 +1407,17 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
                     }
                     if (n3 == 6 && chipBlue3.left > 7 * d && chipBlue3.top == top + 7 * d) {
                         chipBlue3.visibility = INVISIBLE
-                        PlayerNo = pt
                         x11 = 0
+                        PlayerNo = pt
                         setDiceClickable()
                     }
                     if (n4 == 6 && chipBlue4.left > 7 * d && chipBlue4.top == top + 7 * d) {
                         chipBlue4.visibility = INVISIBLE
-                        PlayerNo = pt
                         x12 = 0
+                        PlayerNo = pt
                         setDiceClickable()
                     }
+
                     if (n1 > 5 && chipBlue1.left > 7 * d && chipBlue1.top == top + 7 * d || chipBlue1.visibility == INVISIBLE) chipBlue1.isClickable = false
                     if (n2 > 5 && chipBlue2.left > 7 * d && chipBlue2.top == top + 7 * d || chipBlue2.visibility == INVISIBLE) chipBlue2.isClickable = false
                     if (n3 > 5 && chipBlue3.left > 7 * d && chipBlue3.top == top + 7 * d || chipBlue3.visibility == INVISIBLE) chipBlue3.isClickable = false
@@ -1462,28 +1464,29 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
 
                     if (n1 == 6 && chipRed1.top < top + 7 * d && chipRed1.left == 7 * d) {
                         chipRed1.visibility = INVISIBLE
-                        PlayerNo = pt
                         x5 = 0
+                        PlayerNo = pt
                         setDiceClickable()
                     }
                     if (n2 == 6 && chipRed2.top < top + 7 * d && chipRed2.left == 7 * d) {
                         chipRed2.visibility = INVISIBLE
-                        PlayerNo = pt
                         x6 = 0
+                        PlayerNo = pt
                         setDiceClickable()
                     }
                     if (n3 == 6 && chipRed3.top < top + 7 * d && chipRed3.left == 7 * d) {
                         chipRed3.visibility = INVISIBLE
-                        PlayerNo = pt
                         x7 = 0
+                        PlayerNo = pt
                         setDiceClickable()
                     }
                     if (n4 == 6 && chipRed4.top < top + 7 * d && chipRed4.left == 7 * d) {
                         chipRed4.visibility = INVISIBLE
-                        PlayerNo = pt
                         x8 = 0
+                        PlayerNo = pt
                         setDiceClickable()
                     }
+
                     if (n1 > 5 && chipRed1.top < top + 7 * d && chipRed1.left == 7 * d || chipRed1.visibility == INVISIBLE) chipRed1.isClickable = false
                     if (n2 > 5 && chipRed2.top < top + 7 * d && chipRed2.left == 7 * d || chipRed2.visibility == INVISIBLE) chipRed2.isClickable = false
                     if (n3 > 5 && chipRed3.top < top + 7 * d && chipRed3.left == 7 * d || chipRed3.visibility == INVISIBLE) chipRed3.isClickable = false
@@ -1575,6 +1578,7 @@ class GameOfflineActivity : AppCompatActivity(), View.OnClickListener {
         PlayerNo = 1
         setDiceClickable()
     }
+
 
     private fun positionOf(x: Int, chipX: ImageView): Int {
         var x = x

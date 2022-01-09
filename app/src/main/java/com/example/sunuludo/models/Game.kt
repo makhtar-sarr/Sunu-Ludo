@@ -1,11 +1,11 @@
 package com.example.sunuludo.models
 
+import com.google.firebase.database.IgnoreExtraProperties
 import java.io.Serializable
 import java.util.*
 
+@IgnoreExtraProperties
 data class Game(
-//    var idGame: String = UUID.randomUUID().toString(),
-//    var playerNumber: Number = 2,
     var playerGreen: String = "",
     var playerYellow: String = "",
     var playerRed: String = "",
